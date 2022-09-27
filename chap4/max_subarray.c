@@ -3,10 +3,10 @@
  * @author luka luig (luka@4luig.de)
  * @brief implementation of clrs algorithm: find the maximum subarray
  * @date 2022-09-27
- * 
+ *
  * @copyright Copyright (c) 2022 luka luig
  * licensed under the GNU General Public License v3.0
- * 
+ *
  */
 
 #include <limits.h>

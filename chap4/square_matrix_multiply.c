@@ -5,8 +5,6 @@
  * @date 2022-09-27
  *
  * @copyright Copyright (c) 2022 luka luig
- * licensed under the GNU General Public License v3.0
- *
  */
 
 #include <stdio.h>

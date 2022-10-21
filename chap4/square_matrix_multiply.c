@@ -1,65 +1,37 @@
 /**
  * @file square_matrix_multiply.c
  * @author luka luig (luka@4luig.de)
- * @brief implementation of clrs algorithm: square matrix multiply
+ * @brief implementation of clrs algorithm: square matrix multiply, but generalized to any matrix dimensions
  * @date 2022-09-27
  *
- * @copyright Copyright (c) 2022 luka luig
- */
-
-#include <stdio.h>
-
-/**
- * @brief multiply 2 square matrices ||
- * @brief result matrix must be already be declared by the caller
+ * Copyright (c) 2022 luka luig
  *
- * @param n size of square matrices
- * @param A n*n matrix
- * @param B n*n matrix
- * @param *result pointer to matrix assigned with result of A * B
  */
-void multiply_square_matrix(int n, int A[n][n], int B[n][n], int (*result)[n][n]);
 
-/**
- * @brief simple print function for 2D square matrices
- *
- * @param n size
- * @param matrix n*n matrix
- */
-void print_2D_array(int n, int matrix[n][n]);
+#include "../helper.c"
+#include "../matrix.c"
 
 int main(void) {
-	int A[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-	int B[3][3] = {{9, 8, 7}, {6, 5, 4}, {3, 2, 1}};
-	int size = 3;
+	// let user determine size of matrices
+	int a_row = input_int_min_max(1, 10, "Number of rows in matrix A");
+	int a_column = input_int_min_max(1, 10, "Number of columns in matrix A (and rows in B)");
+	int b_column = input_int_min_max(1, 10, "Number of columns in matrix B");
+
+	Matrix A = make_matrix(a_row, a_column);
+	printf("Please enter values for A:\n");
+	fill_matrix(&A);
+
+	Matrix B = make_matrix(a_column, b_column);
+	printf("Please enter values for B:\n");
+	fill_matrix(&B);
 
 	printf("Matrix A:\n");
-	print_2D_array(size, A);
+	print_matrix(&A);
 	printf("Matrix B:\n");
-	print_2D_array(size, B);
-
-	int result[size][size];
-	multiply_square_matrix(size, A, B, &result);
-
-	printf("A * B:\n");
-	print_2D_array(size, result);
-}
-
-void multiply_square_matrix(int n, int A[n][n], int B[n][n], int (*result)[n][n]) {
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			(*result)[i][j] = 0;
-			for (int k = 0; k < n; k++)
-				(*result)[i][j] = (*result)[i][j] + A[i][k] * B[k][j];
-		}
-	}
-}
-
-void print_2D_array(int n, int matrix[n][n]) {
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++)
-			printf("%d ", matrix[i][j]);
-		printf("\n");
-	}
+	print_matrix(&B);
 	printf("\n");
+
+	printf("Matrix A*B:\n");
+	Matrix C = multiply_matrix(&A, &B);
+	print_matrix(&C);
 }

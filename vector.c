@@ -24,6 +24,7 @@ void init_vector(Vector *vec, size_t init_size) {
 	vec->size = init_size;
 }
 
+// append element, checks for memory
 void insert_vector(Vector *vec, int x) {
 	// check if enough memory
 	// if not -> double size
@@ -34,6 +35,7 @@ void insert_vector(Vector *vec, int x) {
 	vec->vector[vec->used++] = x;
 }
 
+// remove last element and return it
 int pop_vector(Vector *vec) {
 	if (vec->used == 0) {
 		printf("Vector is already empty");
@@ -44,6 +46,7 @@ int pop_vector(Vector *vec) {
 	}
 }
 
+// free allocated memory, remove pointer
 void free_vector(Vector *vec) {
 	free(vec->vector);
 	vec->vector = NULL;
@@ -55,21 +58,3 @@ void print_vector(Vector *vec) {
 		printf("%d ", vec->vector[i]);
 	printf("\n");
 }
-
-// // Testing
-// int main(){
-// 	Vector my_vec;
-// 	init_vector(&my_vec, 10);
-
-// 	int tmp;
-// 	for(int i = 0; i < 10; i++){ 
-// 		scanf("%d", &tmp);
-// 		insert_vector(&my_vec, tmp);
-// 	}
-
-// 	print_vector(&my_vec);
-// 	int popped = pop_vector(&my_vec);
-// 	print_vector(&my_vec);
-// 	printf("popped: %d\n", popped);
-// 	free_vector(&my_vec);
-// }

@@ -23,7 +23,6 @@ int main(void) {
 	printf("Please enter values for matrix B:\n");
 	fill_matrix(&B);
 
-
 	printf("Matrix A:\n");
 	print_matrix(&A);
 	printf("Matrix B:\n");
